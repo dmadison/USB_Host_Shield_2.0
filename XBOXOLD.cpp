@@ -293,6 +293,7 @@ void XBOXOLD::printReport(uint16_t length __attribute__((unused))) { //Uncomment
 }
 
 uint8_t XBOXOLD::getButtonPress(ButtonEnum b) {
+        if ((uint8_t)b >= sizeof(XBOXOLD_BUTTONS)) return 0;
         uint8_t button = pgm_read_byte(&XBOXOLD_BUTTONS[(uint8_t)b]);
         if(b == A || b == B || b == X || b == Y || b == BLACK || b == WHITE || b == L1 || b == R1) // A, B, X, Y, BLACK, WHITE, L1, and R1 are analog buttons
                 return buttonValues[button]; // Analog buttons
@@ -300,6 +301,7 @@ uint8_t XBOXOLD::getButtonPress(ButtonEnum b) {
 }
 
 bool XBOXOLD::getButtonClick(ButtonEnum b) {
+        if ((uint8_t)b >= sizeof(XBOXOLD_BUTTONS)) return 0;
         uint8_t button = pgm_read_byte(&XBOXOLD_BUTTONS[(uint8_t)b]);
         if(b == A || b == B || b == X || b == Y || b == BLACK || b == WHITE || b == L1 || b == R1) { // A, B, X, Y, BLACK, WHITE, L1, and R1 are analog buttons
                 if(buttonClicked[button]) {
